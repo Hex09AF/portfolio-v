@@ -1,8 +1,9 @@
 import StdioJob from "@/docs/stdio.mdx";
 import { KEY_CODES } from "@/utils";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import Reveal from "../Reveal";
 
 const StyledJobsSection = styled.section`
   max-width: 700px;
@@ -181,7 +182,6 @@ const Jobs = () => {
   const [activeTabId, setActiveTabId] = useState(0);
   const [tabFocus, setTabFocus] = useState(null);
   const tabs = useRef([]);
-  const revealContainer = useRef(null);
 
   const focusTab = () => {
     if (tabs.current[tabFocus]) {
@@ -223,72 +223,74 @@ const Jobs = () => {
   };
 
   return (
-    <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+    <StyledJobsSection id="jobs">
+      <Reveal>
+        <h2 className="numbered-heading">Where I’ve Worked</h2>
 
-      <div className="inner">
-        <StyledTabList
-          role="tablist"
-          aria-label="Job tabs"
-          onKeyDown={(e) => onKeyDown(e)}
-        >
-          {jobsData.map(({ company }, i) => {
-            return (
-              <StyledTabButton
-                key={i}
-                $isActive={activeTabId === i}
-                onClick={() => setActiveTabId(i)}
-                ref={(el) => (tabs.current[i] = el)}
-                id={`tab-${i}`}
-                role="tab"
-                tabIndex={activeTabId === i ? 0 : -1}
-                aria-selected={activeTabId === i ? true : false}
-                aria-controls={`panel-${i}`}
-              >
-                <span>{company}</span>
-              </StyledTabButton>
-            );
-          })}
-          <StyledHighlight $activeTabId={activeTabId} />
-        </StyledTabList>
-
-        <StyledTabPanels>
-          {jobsData.map(({ company, Content, meta }, i) => {
-            const { title, url, range } = meta;
-            return (
-              <motion.div key={i}>
-                <StyledTabPanel
-                  id={`panel-${i}`}
-                  role="tabpanel"
+        <div className="inner">
+          <StyledTabList
+            role="tablist"
+            aria-label="Job tabs"
+            onKeyDown={(e) => onKeyDown(e)}
+          >
+            {jobsData.map(({ company }, i) => {
+              return (
+                <StyledTabButton
+                  key={i}
+                  $isActive={activeTabId === i}
+                  onClick={() => setActiveTabId(i)}
+                  ref={(el) => (tabs.current[i] = el)}
+                  id={`tab-${i}`}
+                  role="tab"
                   tabIndex={activeTabId === i ? 0 : -1}
-                  aria-labelledby={`tab-${i}`}
-                  aria-hidden={activeTabId !== i}
-                  hidden={activeTabId !== i}
+                  aria-selected={activeTabId === i ? true : false}
+                  aria-controls={`panel-${i}`}
                 >
-                  <h3>
-                    <span>{title}</span>
-                    <span className="company">
-                      &nbsp;@&nbsp;
-                      <a
-                        href={url}
-                        className="inline-link"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {company}
-                      </a>
-                    </span>
-                  </h3>
+                  <span>{company}</span>
+                </StyledTabButton>
+              );
+            })}
+            <StyledHighlight $activeTabId={activeTabId} />
+          </StyledTabList>
 
-                  <p className="range">{range}</p>
+          <StyledTabPanels>
+            {jobsData.map(({ company, Content, meta }, i) => {
+              const { title, url, range } = meta;
+              return (
+                <motion.div key={i}>
+                  <StyledTabPanel
+                    id={`panel-${i}`}
+                    role="tabpanel"
+                    tabIndex={activeTabId === i ? 0 : -1}
+                    aria-labelledby={`tab-${i}`}
+                    aria-hidden={activeTabId !== i}
+                    hidden={activeTabId !== i}
+                  >
+                    <h3>
+                      <span>{title}</span>
+                      <span className="company">
+                        &nbsp;@&nbsp;
+                        <a
+                          href={url}
+                          className="inline-link"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {company}
+                        </a>
+                      </span>
+                    </h3>
 
-                  <div>{<Content />}</div>
-                </StyledTabPanel>
-              </motion.div>
-            );
-          })}
-        </StyledTabPanels>
-      </div>
+                    <p className="range">{range}</p>
+
+                    <div>{<Content />}</div>
+                  </StyledTabPanel>
+                </motion.div>
+              );
+            })}
+          </StyledTabPanels>
+        </div>
+      </Reveal>
     </StyledJobsSection>
   );
 };

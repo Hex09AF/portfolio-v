@@ -4,7 +4,7 @@ import { Metadata } from "next";
 const title = "Le Sy Quoc Huy";
 const siteName = title;
 const description =
-  "Le Sy Quoc Huy is a software engineer specializing in building exceptional digital experiences, passionate about making websites that have best performance, secure and friendly with other developer.";
+  "Le Sy Quoc Huy is a software developer specializing in building exceptional digital experiences, passionate about making websites that have best performance, secure and friendly with other developer.";
 
 export const metadata: Metadata = {
   title,

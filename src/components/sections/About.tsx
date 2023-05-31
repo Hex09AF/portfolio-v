@@ -1,9 +1,7 @@
 "use client";
-
-import { srConfig } from "@/config";
-import { usePrefersReducedMotion } from "@/hooks";
-import { useEffect, useRef } from "react";
+import { cubicBezier, motion } from "framer-motion";
 import styled from "styled-components";
+import Reveal from "../Reveal";
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -127,51 +125,54 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about">
-      <h2 className="numbered-heading">About Me</h2>
+      <Reveal>
+        <h2 className="numbered-heading">About Me</h2>
 
-      <div className="inner">
-        <StyledText>
-          <div>
-            <p>
-              Hello! My name is Huy, I enjoy creating things that live on the
-              internet. My interest in web development started back in 2016 when
-              I decided to try earning money by helping my brother in his upwork
-              job.
-            </p>
+        <div className="inner">
+          <StyledText>
+            <div>
+              <p>
+                Hello! My name is Huy, I enjoy creating things that live on the
+                internet. My interest in web development started back in 2016
+                when I decided to try earning money by helping my brother in his
+                upwork job.
+              </p>
 
-            <p>
-              Fast-forward to today, and I’ve had the privilege of learning at
-              <a
-                href="https://husc.edu.vn/en/news.php"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                University of Sciences - Hue University
-              </a>
-              , working at{" "}
-              <a
-                href="https://stdiohue.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                a start up
-              </a>
-              teach me a lot, a lot of things. My main focus these days is
-              untangling my skills by learning more languages, and never stop
-              learning to become a good developer.
-            </p>
+              <p>
+                Fast-forward to today, and I’ve had the privilege of learning at
+                <a
+                  href="https://husc.edu.vn/en/news.php"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  University of Sciences - Hue University
+                </a>
+                , working at{" "}
+                <a
+                  href="https://stdiohue.com/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  a start up
+                </a>
+                teach me a lot, a lot of things. My main focus these days is
+                untangling my skills by learning more languages, and never stop
+                learning to become a good developer.
+              </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
-          </div>
+              <p>
+                Here are a few technologies I’ve been working with recently:
+              </p>
+            </div>
 
-          <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-          </ul>
-        </StyledText>
+            <ul className="skills-list">
+              {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            </ul>
+          </StyledText>
 
-        <StyledPic>
-          <div className="wrapper">
-            {/* <Image
+          <StyledPic>
+            <div className="wrapper">
+              {/* <Image
               className="img"
               src="/../images/me.jpg"
               width={500}
@@ -179,9 +180,10 @@ const About = () => {
               quality={95}
               alt="Headshot"
             /> */}
-          </div>
-        </StyledPic>
-      </div>
+            </div>
+          </StyledPic>
+        </div>
+      </Reveal>
     </StyledAboutSection>
   );
 };

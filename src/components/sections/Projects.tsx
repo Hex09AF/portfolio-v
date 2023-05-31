@@ -1,8 +1,8 @@
 import { Icon } from "@/components/icons";
-import { usePrefersReducedMotion } from "@/hooks";
-import { motion } from "framer-motion";
+import { cubicBezier, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import styled from "styled-components";
+import Reveal from "../Reveal";
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -24,7 +24,7 @@ const StyledProjectsSection = styled.section`
   .projects-grid {
     ${({ theme }) => theme.mixins.resetList};
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-gap: 15px;
     position: relative;
     margin-top: 50px;
@@ -164,7 +164,6 @@ const StyledProject = styled.li`
 
 const Projects = () => {
   const [showMore, setShowMore] = useState(false);
-  const revealTitle = useRef(null);
 
   const GRID_LIMIT = 6;
   const projects = [
@@ -182,6 +181,55 @@ const Projects = () => {
     {
       content:
         "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+      meta: {
+        title: "Pito",
+        github: "",
+        external: "https://app.pito.vn/",
+        tech: ["React", "NextJs", "GatsbyJs"],
+      },
+    },
+    {
+      content:
+        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+      meta: {
+        title: "Pito",
+        github: "",
+        external: "https://app.pito.vn/",
+        tech: ["React", "NextJs", "GatsbyJs"],
+      },
+    },
+    {
+      content:
+        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+      meta: {
+        title: "Pito",
+        github: "",
+        external: "https://app.pito.vn/",
+        tech: ["React", "NextJs", "GatsbyJs"],
+      },
+    },
+    {
+      content:
+        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+      meta: {
+        title: "Pito",
+        github: "",
+        external: "https://app.pito.vn/",
+        tech: ["React", "NextJs", "GatsbyJs"],
+      },
+    },
+    {
+      content:
+        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+      meta: {
+        title: "Pito",
+        github: "",
+        external: "https://app.pito.vn/",
+        tech: ["React", "NextJs", "GatsbyJs"],
+      },
+    },
+    {
+      content: "Heck no",
       meta: {
         title: "Pito",
         github: "",
@@ -252,13 +300,29 @@ const Projects = () => {
 
   return (
     <StyledProjectsSection>
-      <h2>Other Noteworthy Projects</h2>
+      <Reveal>
+        <h2>Other Noteworthy Projects</h2>
+      </Reveal>
 
       <ul className="projects-grid">
         {projectsToShow &&
           projectsToShow.map(({ content, meta }, i) => (
             <StyledProject key={i}>
-              <motion.div>{projectInner(meta, content)}</motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ amount: 0.25, once: true }}
+                transition={{
+                  duration: 0.5,
+                  ease: cubicBezier(0.645, 0.045, 0.355, 1),
+                  delay:
+                    i >= GRID_LIMIT
+                      ? ((i - GRID_LIMIT) % 4) * 0.2
+                      : ((i + 1) % 4) * 0.2,
+                }}
+              >
+                {projectInner(meta, content)}
+              </motion.div>
             </StyledProject>
           ))}
       </ul>

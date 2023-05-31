@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import anime from "animejs";
-import styled from "styled-components";
 import { IconLoader } from "@/components/icons";
+import { cubicBezier, useAnimate } from "framer-motion";
+import { useEffect } from "react";
+import styled from "styled-components";
 
-const StyledLoader = styled.div<{
-  $isMounted: boolean;
-}>`
+const StyledLoader = styled.div`
   ${({ theme }) => theme.mixins.flexCenter};
   position: fixed;
   top: 0;
@@ -24,7 +21,7 @@ const StyledLoader = styled.div<{
     width: max-content;
     max-width: 100px;
     transition: var(--transition);
-    opacity: ${(props) => (props.$isMounted ? 1 : 0)};
+    opacity: 0;
     svg {
       display: block;
       width: 100%;
@@ -32,69 +29,79 @@ const StyledLoader = styled.div<{
       margin: 0 auto;
       fill: none;
       user-select: none;
-      #B {
-        opacity: 0;
-      }
     }
   }
 `;
 
 const Loader = ({ finishLoading }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  const animate = () => {
-    const loader = anime.timeline({
-      complete: () => finishLoading(),
-    });
-
-    loader
-      .add({
-        targets: "#logo path",
-        delay: 300,
-        duration: 1500,
-        easing: "easeInOutQuart",
-        strokeDashoffset: [anime.setDashoffset, 0],
-      })
-      .add({
-        targets: "#logo #B",
-        duration: 700,
-        easing: "easeInOutQuart",
-        opacity: 1,
-      })
-      .add({
-        targets: "#logo",
-        delay: 500,
-        duration: 300,
-        easing: "easeInOutQuart",
-        opacity: 0,
-        scale: 0.1,
-      })
-      .add({
-        targets: ".loader",
-        duration: 200,
-        easing: "easeInOutQuart",
-        opacity: 0,
-        zIndex: -1,
-      });
-  };
+  const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
-    return () => clearTimeout(timeout);
-  }, []);
+    animate([
+      [
+        ".loader .logo-wrapper",
+        {
+          opacity: [0, 1],
+        },
+        {
+          duration: 0,
+        },
+      ],
+      [
+        ".loader #logo path",
+        {
+          pathLength: [0, 1],
+        },
+        {
+          duration: 1.5,
+          ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+      ],
+      [
+        ".loader #logo #B",
+        {
+          opacity: [0, 1],
+        },
+        {
+          duration: 0.7,
+          ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+      ],
+      [
+        ".loader #logo",
+        {
+          scale: 0.1,
+          opacity: 0,
+        },
+        {
+          delay: 0.5,
+          duration: 0.3,
+          ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+      ],
+      [
+        ".loader",
+        {
+          opacity: 0,
+          zIndex: -1,
+        },
+        {
+          duration: 0.2,
+          ease: cubicBezier(0.76, 0, 0.24, 1),
+        },
+      ],
+    ]).then(() => {
+      finishLoading();
+    });
+  }, [animate]);
 
   return (
-    <StyledLoader className="loader" $isMounted={isMounted}>
+    <StyledLoader className="loader" ref={scope}>
       <div className="logo-wrapper">
         <IconLoader />
       </div>
     </StyledLoader>
   );
-};
-
-Loader.propTypes = {
-  finishLoading: PropTypes.func.isRequired,
 };
 
 export default Loader;

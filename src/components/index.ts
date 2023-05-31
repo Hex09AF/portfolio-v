@@ -12,3 +12,4 @@ export { default as Social } from "./Social";
 export { default as Side } from "./Side";
 export { default as Email } from "./Email";
 export { default as Footer } from "./Footer";
+export { default as Reveal } from "./Reveal";

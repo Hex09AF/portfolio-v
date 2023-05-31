@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { srConfig } from "@/config";
 import { Icon } from "@/components/icons";
-import { usePrefersReducedMotion } from "@/hooks";
-import Image from "next/image";
-import Sudoku from "@/docs/featured/sudoku/sudoku.mdx";
 import Portfolio from "@/docs/featured/portfolio/portfolio.mdx";
+import Sudoku from "@/docs/featured/sudoku/sudoku.mdx";
+import { cubicBezier, motion } from "framer-motion";
+import Image from "next/image";
+import styled from "styled-components";
+import Reveal from "../Reveal";
 
 const StyledProjectsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
@@ -16,29 +15,7 @@ const StyledProjectsGrid = styled.ul`
   }
 `;
 
-const StyledProject = styled.li`
-  position: relative;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(12, 1fr);
-  align-items: center;
-
-  @media (max-width: 768px) {
-    ${({ theme }) => theme.mixins.boxShadow};
-  }
-
-  &:not(:last-of-type) {
-    margin-bottom: 100px;
-
-    @media (max-width: 768px) {
-      margin-bottom: 70px;
-    }
-
-    @media (max-width: 480px) {
-      margin-bottom: 30px;
-    }
-  }
-
+const StyledReveal = styled(motion.li)`
   &:nth-of-type(odd) {
     .project-content {
       grid-column: 7 / -1;
@@ -89,6 +66,30 @@ const StyledProject = styled.li`
         grid-column: 1 / -1;
       }
     }
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 100px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 70px;
+    }
+
+    @media (max-width: 480px) {
+      margin-bottom: 30px;
+    }
+  }
+`;
+
+const StyledProject = styled.div`
+  position: relative;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+
+  @media (max-width: 768px) {
+    ${({ theme }) => theme.mixins.boxShadow};
   }
 
   .project-content {
@@ -336,95 +337,106 @@ const Featured = () => {
       },
     },
   ];
-  const revealTitle = useRef(null);
 
   return (
     <section id="projects">
-      <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
-      </h2>
+      <Reveal>
+        <h2 className="numbered-heading">Some Things I’ve Built</h2>
+      </Reveal>
 
       <StyledProjectsGrid>
         {featuredProjects.map(({ meta, Content }, i) => {
           const { external, title, tech, github, cover, cta } = meta;
 
           return (
-            <StyledProject key={i}>
-              <div className="project-content">
-                <div>
-                  <p className="project-overline">Featured Project</p>
+            <StyledReveal
+              key={i}
+              initial={{ opacity: 0, y: 30, x: i % 2 == 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, y: 0, x: 0 }}
+              viewport={{ amount: 0.25, once: true }}
+              transition={{
+                duration: 0.5,
+                ease: cubicBezier(0.645, 0.045, 0.355, 1),
+                delay: 0.2,
+              }}
+            >
+              <StyledProject>
+                <div className="project-content">
+                  <div>
+                    <p className="project-overline">Featured Project</p>
 
-                  <h3 className="project-title">
-                    <a href={external}>{title}</a>
-                  </h3>
+                    <h3 className="project-title">
+                      <a href={external}>{title}</a>
+                    </h3>
 
-                  <div className="project-description">
-                    <Content />
-                  </div>
+                    <div className="project-description">
+                      <Content />
+                    </div>
 
-                  {tech.length && (
-                    <ul className="project-tech-list">
-                      {tech.map((tech, i) => (
-                        <li key={i}>{tech}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <div className="project-links">
-                    {cta && (
-                      <a
-                        href={cta}
-                        aria-label="Course Link"
-                        className="cta"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        Learn More
-                      </a>
+                    {tech.length && (
+                      <ul className="project-tech-list">
+                        {tech.map((tech, i) => (
+                          <li key={i}>{tech}</li>
+                        ))}
+                      </ul>
                     )}
-                    {github && (
-                      <a
-                        href={github}
-                        aria-label="GitHub Link"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <Icon name="GitHub" />
-                      </a>
-                    )}
-                    {external && !cta && (
-                      <a
-                        href={external}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        aria-label="External Link"
-                        className="external"
-                      >
-                        <Icon name="External" />
-                      </a>
-                    )}
+
+                    <div className="project-links">
+                      {cta && (
+                        <a
+                          href={cta}
+                          aria-label="Course Link"
+                          className="cta"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Learn More
+                        </a>
+                      )}
+                      {github && (
+                        <a
+                          href={github}
+                          aria-label="GitHub Link"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <Icon name="GitHub" />
+                        </a>
+                      )}
+                      {external && !cta && (
+                        <a
+                          href={external}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          aria-label="External Link"
+                          className="external"
+                        >
+                          <Icon name="External" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="project-image">
-                <a
-                  href={external ? external : github ? github : "#"}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <div className="img">
-                    <Image
-                      src={cover}
-                      alt={title}
-                      width={640}
-                      height={400}
-                      className="cover"
-                    />
-                  </div>
-                </a>
-              </div>
-            </StyledProject>
+                <div className="project-image">
+                  <a
+                    href={external ? external : github ? github : "#"}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <div className="img">
+                      <Image
+                        src={cover}
+                        alt={title}
+                        width={640}
+                        height={400}
+                        className="cover"
+                      />
+                    </div>
+                  </a>
+                </div>
+              </StyledProject>
+            </StyledReveal>
           );
         })}
       </StyledProjectsGrid>
