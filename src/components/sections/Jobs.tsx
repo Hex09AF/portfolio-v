@@ -180,20 +180,28 @@ const Jobs = () => {
   ];
 
   const [activeTabId, setActiveTabId] = useState(0);
-  const [tabFocus, setTabFocus] = useState(0);
+  const [tabFocus, setTabFocus] = useState<null | number>(null);
   const tabs = useRef<HTMLButtonElement[]>([]);
+
+  const selectTab = useCallback(
+    (i: number) => () => {
+      setActiveTabId(i);
+      setTabFocus(i);
+    },
+    []
+  );
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case KEY_CODES.ARROW_UP: {
         e.preventDefault();
-        setTabFocus((pre) => pre - 1);
+        setTabFocus((pre) => (pre || 0) - 1);
         break;
       }
 
       case KEY_CODES.ARROW_DOWN: {
         e.preventDefault();
-        setTabFocus((pre) => pre + 1);
+        setTabFocus((pre) => (pre || 0) + 1);
         break;
       }
 
@@ -204,10 +212,11 @@ const Jobs = () => {
   }, []);
 
   const focusTab = useCallback(() => {
+    if (tabFocus === null) return;
+
     if (tabFocus >= tabs.current.length) {
       setTabFocus(0);
-    }
-    if (tabFocus < 0) {
+    } else if (tabFocus < 0) {
       setTabFocus(tabs.current.length - 1);
     } else {
       tabs.current[tabFocus].focus();
@@ -233,7 +242,7 @@ const Jobs = () => {
               <StyledTabButton
                 key={i}
                 $isActive={activeTabId === i}
-                onClick={() => setActiveTabId(i)}
+                onClick={selectTab(i)}
                 ref={(el: HTMLButtonElement) => {
                   tabs.current[i] = el;
                 }}

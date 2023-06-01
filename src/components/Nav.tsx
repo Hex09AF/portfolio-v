@@ -222,7 +222,9 @@ const Nav = () => {
               {navLinks &&
                 navLinks.map(({ url, name }, i) => (
                   <li className="nav-li" key={i}>
-                    <Link href={url}>{name}</Link>
+                    <Link href={url} scroll={false}>
+                      {name}
+                    </Link>
                   </li>
                 ))}
             </ol>
