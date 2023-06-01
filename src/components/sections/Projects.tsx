@@ -7,12 +7,13 @@ import styled from "styled-components";
 import Reveal from "../Reveal";
 
 const StyledProjectsSection = styled.section`
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  h2 {
-    font-size: clamp(24px, 5vw, var(--fz-heading));
+  h3 {
+    margin-bottom: 0;
   }
 
   .archive-link {
@@ -29,7 +30,7 @@ const StyledProjectsSection = styled.section`
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-gap: 15px;
     position: relative;
-    margin-top: 50px;
+    margin-top: 25px;
 
     @media (max-width: 1080px) {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -286,7 +287,7 @@ const Projects = () => {
   return (
     <StyledProjectsSection>
       <Reveal>
-        <h2>Other Noteworthy Projects</h2>
+        <h3>Other Noteworthy Projects</h3>
       </Reveal>
 
       <ul className="projects-grid">

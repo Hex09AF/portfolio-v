@@ -46,7 +46,7 @@ const StyledHeroSection = styled.section`
   }
 `;
 
-const staggerMenuItems = stagger(0.15, { startDelay: 3.7 });
+const staggerMenuItems = stagger(0.15, { startDelay: 2.5 });
 
 const Hero = () => {
   const one = <h1>Hi, my name is</h1>;

@@ -19,8 +19,10 @@ const StyledReveal = styled(motion.li)`
   &:nth-of-type(odd) {
     .project-content {
       grid-column: 7 / -1;
-      text-align: right;
-
+      .project-overline,
+      .project-title {
+        text-align: right;
+      }
       @media (max-width: 1080px) {
         grid-column: 5 / -1;
       }
@@ -318,7 +320,7 @@ const Featured = () => {
       Content: Portfolio,
       meta: {
         title: "Porfolio v1",
-        cover: "/featured/portfolio/portfolio.png",
+        cover: "/featured/portfolio/portfol.png",
         github: "https://github.com/Hex09AF/me",
         external: "https://me-hex09af.vercel.app/",
         tech: ["SvelteKit", "Tailwindcss", "Gsap", "Threlte", "Typescript"],

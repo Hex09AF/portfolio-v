@@ -38,7 +38,7 @@ const Side = ({
   <StyledSideElement $orientation={orientation}>
     <motion.div
       animate={{ opacity: [0, 1] }}
-      transition={{ delay: 5, ease: cubicBezier(0.645, 0.045, 0.355, 1) }}
+      transition={{ delay: 3, ease: cubicBezier(0.645, 0.045, 0.355, 1) }}
     >
       {children}
     </motion.div>

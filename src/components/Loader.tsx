@@ -53,7 +53,7 @@ const Loader = ({ finishLoading }: { finishLoading: () => void }) => {
           pathLength: [0, 1],
         },
         {
-          duration: 1.5,
+          duration: 0.75,
           ease: cubicBezier(0.76, 0, 0.24, 1),
         },
       ],
@@ -63,18 +63,17 @@ const Loader = ({ finishLoading }: { finishLoading: () => void }) => {
           opacity: [0, 1],
         },
         {
-          duration: 0.7,
+          duration: 0.5,
           ease: cubicBezier(0.76, 0, 0.24, 1),
         },
       ],
       [
         ".loader #logo",
         {
-          scale: 0.1,
           opacity: 0,
         },
         {
-          delay: 0.5,
+          delay: 0.75,
           duration: 0.3,
           ease: cubicBezier(0.76, 0, 0.24, 1),
         },
