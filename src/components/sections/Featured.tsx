@@ -1,4 +1,4 @@
-import { Icon } from "@/components/icons";
+import Icon from "@/components/icons/icon";
 import Portfolio from "@/docs/featured/portfolio/portfolio.mdx";
 import Sudoku from "@/docs/featured/sudoku/sudoku.mdx";
 import { cubicBezier, motion } from "framer-motion";
@@ -351,7 +351,7 @@ const Featured = () => {
           return (
             <StyledReveal
               key={i}
-              initial={{ opacity: 0, y: 30, x: i % 2 == 0 ? -30 : 30 }}
+              initial={{ opacity: 0, y: 30, x: i % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, y: 0, x: 0 }}
               viewport={{ amount: 0.25, once: true }}
               transition={{
@@ -375,8 +375,8 @@ const Featured = () => {
 
                     {tech.length && (
                       <ul className="project-tech-list">
-                        {tech.map((tech, i) => (
-                          <li key={i}>{tech}</li>
+                        {tech.map((tec, indx) => (
+                          <li key={indx}>{tec}</li>
                         ))}
                       </ul>
                     )}
@@ -420,7 +420,7 @@ const Featured = () => {
 
                 <div className="project-image">
                   <a
-                    href={external ? external : github ? github : "#"}
+                    href={external || github || "#"}
                     rel="noopener noreferrer"
                     target="_blank"
                   >

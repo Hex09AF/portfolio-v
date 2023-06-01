@@ -1,6 +1,6 @@
-import { Icon } from "@/components/icons";
+import Icon from "@/components/icons/icon";
 import { cubicBezier, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Reveal from "../Reveal";
 
@@ -241,7 +241,15 @@ const Projects = () => {
   const firstSix = projects.slice(0, GRID_LIMIT);
   const projectsToShow = showMore ? projects : firstSix;
 
-  const projectInner = (meta, content) => {
+  const projectInner = (
+    meta: {
+      github: string;
+      title: string;
+      external: string;
+      tech: string[];
+    },
+    content: string
+  ) => {
     const { github, external, title, tech } = meta;
 
     return (
@@ -288,8 +296,8 @@ const Projects = () => {
         <footer>
           {tech && (
             <ul className="project-tech-list">
-              {tech.map((tech, i) => (
-                <li key={i}>{tech}</li>
+              {tech.map((tec, i) => (
+                <li key={i}>{tec}</li>
               ))}
             </ul>
           )}
@@ -327,7 +335,11 @@ const Projects = () => {
           ))}
       </ul>
 
-      <button className="more-button" onClick={() => setShowMore(!showMore)}>
+      <button
+        type="button"
+        className="more-button"
+        onClick={() => setShowMore(!showMore)}
+      >
         Show {showMore ? "Less" : "More"}
       </button>
     </StyledProjectsSection>

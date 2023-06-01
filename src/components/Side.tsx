@@ -34,17 +34,15 @@ const Side = ({
   orientation,
 }: PropsWithChildren<{
   orientation: SideOrientation;
-}>) => {
-  return (
-    <StyledSideElement $orientation={orientation}>
-      <motion.div
-        animate={{ opacity: [0, 1] }}
-        transition={{ delay: 2, ease: cubicBezier(0.645, 0.045, 0.355, 1) }}
-      >
-        {children}
-      </motion.div>
-    </StyledSideElement>
-  );
-};
+}>) => (
+  <StyledSideElement $orientation={orientation}>
+    <motion.div
+      animate={{ opacity: [0, 1] }}
+      transition={{ delay: 1, ease: cubicBezier(0.645, 0.045, 0.355, 1) }}
+    >
+      {children}
+    </motion.div>
+  </StyledSideElement>
+);
 
 export default Side;

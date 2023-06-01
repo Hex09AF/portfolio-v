@@ -71,11 +71,12 @@ type SfMonoFontType = typeof sfMono;
 
 type LocalFont = CaliberFontType | SfMonoFontType;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createFontFaces = (
   family: LocalFont,
   style: FontStyle = FontStyle.normal
-) => {
-  return Object.entries(family[style]).map(([weight, formats]) => {
+) =>
+  Object.entries(family[style]).map(([weight, formats]) => {
     const woffPath = formats[0];
     return {
       path: woffPath,
@@ -83,7 +84,6 @@ const createFontFaces = (
       style,
     };
   });
-};
 
 const calibreFont = localFont({
   src: [

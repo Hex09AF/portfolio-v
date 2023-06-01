@@ -1,8 +1,11 @@
-"use client";
+import Email from "@/components/Email";
+import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
+import Nav from "@/components/Nav";
+import Social from "@/components/Social";
 
-import { Email, Footer, Loader, Nav, Social } from "@/components";
 import { GlobalStyle, theme } from "@/styles";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useCallback, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
 const StyledContent = styled.div`
@@ -14,21 +17,27 @@ const StyledContent = styled.div`
 const Layout = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
 
+  const finishLoading = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      {isLoading && <Loader finishLoading={() => setIsLoading(false)} />}
+      {isLoading && <Loader finishLoading={finishLoading} />}
 
-      <StyledContent>
-        <Nav />
-        <Social />
-        <Email />
+      {!isLoading && (
+        <StyledContent>
+          <Nav />
+          <Social />
+          <Email />
 
-        <div id="content">
-          {children}
-          <Footer />
-        </div>
-      </StyledContent>
+          <div id="content">
+            {children}
+            <Footer />
+          </div>
+        </StyledContent>
+      )}
     </ThemeProvider>
   );
 };

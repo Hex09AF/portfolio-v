@@ -16,19 +16,17 @@ const StyledMainContainer = styled.main`
   counter-reset: section;
 `;
 
-const IndexPage = () => {
-  return (
-    <Layout>
-      <StyledMainContainer className="fillHeight">
-        <Hero />
-        <About />
-        <Jobs />
-        <Featured />
-        <Projects />
-        <Contact />
-      </StyledMainContainer>
-    </Layout>
-  );
-};
+const IndexPage = () => (
+  <Layout>
+    <StyledMainContainer className="fillHeight">
+      <Hero />
+      <About />
+      <Jobs />
+      <Featured />
+      <Projects />
+      <Contact />
+    </StyledMainContainer>
+  </Layout>
+);
 
 export default IndexPage;

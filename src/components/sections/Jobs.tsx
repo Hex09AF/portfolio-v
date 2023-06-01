@@ -1,7 +1,7 @@
 import StdioJob from "@/docs/stdio.mdx";
 import { KEY_CODES } from "@/utils";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Reveal from "../Reveal";
 
@@ -180,39 +180,20 @@ const Jobs = () => {
   ];
 
   const [activeTabId, setActiveTabId] = useState(0);
-  const [tabFocus, setTabFocus] = useState(null);
-  const tabs = useRef([]);
+  const [tabFocus, setTabFocus] = useState(0);
+  const tabs = useRef<HTMLButtonElement[]>([]);
 
-  const focusTab = () => {
-    if (tabs.current[tabFocus]) {
-      tabs.current[tabFocus].focus();
-      return;
-    }
-    // If we're at the end, go to the start
-    if (tabFocus >= tabs.current.length) {
-      setTabFocus(0);
-    }
-    // If we're at the start, move to the end
-    if (tabFocus < 0) {
-      setTabFocus(tabs.current.length - 1);
-    }
-  };
-
-  // Only re-run the effect if tabFocus changes
-  useEffect(() => focusTab(), [tabFocus]);
-
-  // Focus on tabs when using up & down arrow keys
-  const onKeyDown = (e) => {
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case KEY_CODES.ARROW_UP: {
         e.preventDefault();
-        setTabFocus(tabFocus - 1);
+        setTabFocus((pre) => pre - 1);
         break;
       }
 
       case KEY_CODES.ARROW_DOWN: {
         e.preventDefault();
-        setTabFocus(tabFocus + 1);
+        setTabFocus((pre) => pre + 1);
         break;
       }
 
@@ -220,7 +201,22 @@ const Jobs = () => {
         break;
       }
     }
-  };
+  }, []);
+
+  const focusTab = useCallback(() => {
+    if (tabFocus >= tabs.current.length) {
+      setTabFocus(0);
+    }
+    if (tabFocus < 0) {
+      setTabFocus(tabs.current.length - 1);
+    } else {
+      tabs.current[tabFocus].focus();
+    }
+  }, [tabs, tabFocus]);
+
+  useEffect(() => {
+    focusTab();
+  }, [focusTab, tabFocus]);
 
   return (
     <StyledJobsSection id="jobs">
@@ -231,25 +227,25 @@ const Jobs = () => {
           <StyledTabList
             role="tablist"
             aria-label="Job tabs"
-            onKeyDown={(e) => onKeyDown(e)}
+            onKeyDown={onKeyDown}
           >
-            {jobsData.map(({ company }, i) => {
-              return (
-                <StyledTabButton
-                  key={i}
-                  $isActive={activeTabId === i}
-                  onClick={() => setActiveTabId(i)}
-                  ref={(el) => (tabs.current[i] = el)}
-                  id={`tab-${i}`}
-                  role="tab"
-                  tabIndex={activeTabId === i ? 0 : -1}
-                  aria-selected={activeTabId === i ? true : false}
-                  aria-controls={`panel-${i}`}
-                >
-                  <span>{company}</span>
-                </StyledTabButton>
-              );
-            })}
+            {jobsData.map(({ company }, i) => (
+              <StyledTabButton
+                key={i}
+                $isActive={activeTabId === i}
+                onClick={() => setActiveTabId(i)}
+                ref={(el: HTMLButtonElement) => {
+                  tabs.current[i] = el;
+                }}
+                id={`tab-${i}`}
+                role="tab"
+                tabIndex={activeTabId === i ? 0 : -1}
+                aria-selected={activeTabId === i}
+                aria-controls={`panel-${i}`}
+              >
+                <span>{company}</span>
+              </StyledTabButton>
+            ))}
             <StyledHighlight $activeTabId={activeTabId} />
           </StyledTabList>
 
@@ -283,7 +279,9 @@ const Jobs = () => {
 
                     <p className="range">{range}</p>
 
-                    <div>{<Content />}</div>
+                    <div>
+                      <Content />
+                    </div>
                   </StyledTabPanel>
                 </motion.div>
               );

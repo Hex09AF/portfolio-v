@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { navLinks } from "@/config";
@@ -160,79 +160,36 @@ const StyledSidebar = styled.aside<{ $menuOpen: boolean }>`
   }
 `;
 
-const Menu = () => {
+function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = useCallback(() => setMenuOpen((pre) => !pre), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-  const buttonRef = useRef(null);
-  const navRef = useRef(null);
-
-  let menuFocusables;
-  let firstFocusableEl;
-  let lastFocusableEl;
-
-  const setFocusables = () => {
-    menuFocusables = [
-      buttonRef.current,
-      ...Array.from(navRef.current.querySelectorAll("a")),
-    ];
-    firstFocusableEl = menuFocusables[0];
-    lastFocusableEl = menuFocusables[menuFocusables.length - 1];
-  };
-
-  const handleBackwardTab = (e) => {
-    if (document.activeElement === firstFocusableEl) {
-      e.preventDefault();
-      lastFocusableEl.focus();
-    }
-  };
-
-  const handleForwardTab = (e) => {
-    if (document.activeElement === lastFocusableEl) {
-      e.preventDefault();
-      firstFocusableEl.focus();
-    }
-  };
-
-  const onKeyDown = (e) => {
-    switch (e.key) {
-      case KEY_CODES.ESCAPE:
-      case KEY_CODES.ESCAPE_IE11: {
-        setMenuOpen(false);
-        break;
-      }
-
-      case KEY_CODES.TAB: {
-        if (menuFocusables && menuFocusables.length === 1) {
-          e.preventDefault();
-          break;
-        }
-        if (e.shiftKey) {
-          handleBackwardTab(e);
-        } else {
-          handleForwardTab(e);
-        }
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
-  };
-
-  const onResize = (e) => {
-    if (e.currentTarget.innerWidth > 768) {
-      setMenuOpen(false);
-    }
-  };
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(wrapperRef, closeMenu);
 
   useEffect(() => {
+    const onResize = (e: UIEvent) => {
+      const target = e.currentTarget as Window;
+      if (target.innerWidth > 768) {
+        setMenuOpen(false);
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case KEY_CODES.ESCAPE:
+          setMenuOpen(false);
+          break;
+
+        default:
+          break;
+      }
+    };
+
     document.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
-
-    setFocusables();
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
@@ -240,16 +197,12 @@ const Menu = () => {
     };
   }, []);
 
-  const wrapperRef = useRef();
-  useOnClickOutside(wrapperRef, () => setMenuOpen(false));
-
   return (
     <StyledMenu>
       <div ref={wrapperRef}>
         <StyledHamburgerButton
           onClick={toggleMenu}
           $menuOpen={menuOpen}
-          ref={buttonRef}
           aria-label="Menu"
         >
           <div className="ham-box">
@@ -262,7 +215,7 @@ const Menu = () => {
           aria-hidden={!menuOpen}
           tabIndex={menuOpen ? 1 : -1}
         >
-          <nav ref={navRef}>
+          <nav>
             {navLinks && (
               <ol>
                 {navLinks.map(({ url, name }, i) => (
@@ -283,6 +236,6 @@ const Menu = () => {
       </div>
     </StyledMenu>
   );
-};
+}
 
 export default Menu;

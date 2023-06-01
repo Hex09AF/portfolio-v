@@ -1,9 +1,6 @@
-"use client";
 import { animate, motion, stagger } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import { navDelay, loaderDelay } from "@/utils";
-import { usePrefersReducedMotion } from "@/hooks";
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -47,7 +44,7 @@ const StyledHeroSection = styled.section`
   }
 `;
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
+const staggerMenuItems = stagger(0.1, { startDelay: 0.2 });
 
 const Hero = () => {
   const one = <h1>Hi, my name is</h1>;

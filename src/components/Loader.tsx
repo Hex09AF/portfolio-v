@@ -33,7 +33,7 @@ const StyledLoader = styled.div`
   }
 `;
 
-const Loader = ({ finishLoading }) => {
+const Loader = ({ finishLoading }: { finishLoading: () => void }) => {
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const Loader = ({ finishLoading }) => {
     ]).then(() => {
       finishLoading();
     });
-  }, [animate]);
+  }, [animate, finishLoading]);
 
   return (
     <StyledLoader className="loader" ref={scope}>

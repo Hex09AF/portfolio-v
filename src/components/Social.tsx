@@ -1,8 +1,8 @@
-import { Side } from "@/components";
-import { Icon } from "@/components/icons";
+import Side from "@/components/Side";
+import Icon from "@/components/icons/icon";
 import { socialMedia } from "@/config";
 import { SideOrientation } from "@/types";
-import PropTypes from "prop-types";
+
 import styled from "styled-components";
 
 const StyledSocialList = styled.ul`
@@ -57,9 +57,5 @@ const Social = () => (
     </StyledSocialList>
   </Side>
 );
-
-Social.propTypes = {
-  isHome: PropTypes.bool,
-};
 
 export default Social;

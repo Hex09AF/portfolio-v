@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/no-array-index-key": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-no-useless-fragment": 0,
+    "react/function-component-definition": 0,
+    "react/react-in-jsx-scope": 0
+  }
 }

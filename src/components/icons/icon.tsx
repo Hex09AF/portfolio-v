@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import {
   IconAppStore,
   IconBookmark,
@@ -17,7 +17,7 @@ import {
   IconTwitter,
 } from "@/components/icons";
 
-const Icon = ({ name }) => {
+const Icon = ({ name }: { name: string }) => {
   switch (name) {
     case "AppStore":
       return <IconAppStore />;
@@ -50,10 +50,6 @@ const Icon = ({ name }) => {
     default:
       return <IconExternal />;
   }
-};
-
-Icon.propTypes = {
-  name: PropTypes.string.isRequired,
 };
 
 export default Icon;
