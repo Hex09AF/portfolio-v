@@ -178,7 +178,7 @@ const About = () => {
     "TypeScript",
     "React",
     "NextJs",
-    "Vue 3",
+    "Vue",
     "Nuxt",
     "Node",
     "Express",
