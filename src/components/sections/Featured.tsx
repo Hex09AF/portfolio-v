@@ -318,7 +318,7 @@ const Featured = () => {
         title: "Competitive Sudoku",
         cover: "/featured/sudoku/sudoku.webp",
         github: "https://github.com/Hex09AF/sudoku",
-        external: "https://halcyon-theme.netlify.com/",
+        external: "https://sudoku-web.onrender.com",
         tech: ["Remix", "XState", "SCSS", "Socket", "Prisma"],
         cta: "",
       },
