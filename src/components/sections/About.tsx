@@ -58,6 +58,7 @@ const StyledPic = styled.div`
     display: block;
     position: relative;
     width: 100%;
+    height: 100%;
     border-radius: var(--border-radius);
     background-color: var(--green);
 
@@ -72,12 +73,72 @@ const StyledPic = styled.div`
 
       .img {
         filter: none;
-        mix-blend-mode: normal;
       }
     }
 
     .img {
       position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+          50% 50% at 100% 0,
+          #47d3ff 0% 5%,
+          #474bff 6% 15%,
+          #47d3ff 16% 25%,
+          #474bff 26% 35%,
+          #47d3ff 36% 45%,
+          #474bff 46% 55%,
+          #47d3ff 56% 65%,
+          #474bff 66% 75%,
+          #47d3ff 76% 85%,
+          #474bff 86% 95%,
+          #0000 96%
+        ),
+        radial-gradient(
+          50% 50% at 0 100%,
+          #47d3ff 0% 5%,
+          #474bff 6% 15%,
+          #47d3ff 16% 25%,
+          #474bff 26% 35%,
+          #47d3ff 36% 45%,
+          #474bff 46% 55%,
+          #47d3ff 56% 65%,
+          #474bff 66% 75%,
+          #47d3ff 76% 85%,
+          #474bff 86% 95%,
+          #0000 96%
+        ),
+        radial-gradient(
+          50% 50%,
+          #47d3ff 0% 5%,
+          #474bff 6% 15%,
+          #47d3ff 16% 25%,
+          #474bff 26% 35%,
+          #47d3ff 36% 45%,
+          #474bff 46% 55%,
+          #47d3ff 56% 65%,
+          #474bff 66% 75%,
+          #47d3ff 76% 85%,
+          #474bff 86% 95%,
+          #0000 96%
+        ),
+        radial-gradient(
+            50% 50%,
+            #47d3ff 0% 5%,
+            #474bff 6% 15%,
+            #47d3ff 16% 25%,
+            #474bff 26% 35%,
+            #47d3ff 36% 45%,
+            #474bff 46% 55%,
+            #47d3ff 56% 65%,
+            #474bff 66% 75%,
+            #47d3ff 76% 85%,
+            #474bff 86% 95%,
+            #0000 96%
+          )
+          32px 32px;
+      background-size: 64px 64px;
+      background-color: #47d3ff;
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1);
@@ -172,6 +233,7 @@ const About = () => {
 
           <StyledPic>
             <div className="wrapper">
+              <div className="img" />
               {/* <Image
               className="img"
               src="/../images/me.jpg"

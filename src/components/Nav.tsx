@@ -161,7 +161,7 @@ const StyledLinks = styled.div`
   }
 `;
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.2 });
+const staggerMenuItems = stagger(0.1, { startDelay: 3.2 });
 
 const Nav = () => {
   const scrollDirection = useScrollDirection();
@@ -201,7 +201,7 @@ const Nav = () => {
             animate={{ opacity: [0, 1] }}
             transition={{
               duration: 1.2,
-              delay: 0.2,
+              delay: 3.2,
               ease: cubicBezier(0.645, 0.045, 0.355, 1),
             }}
           >

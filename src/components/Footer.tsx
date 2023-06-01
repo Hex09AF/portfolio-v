@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/icons/icon";
 import { socialMedia } from "@/config";
 import { useEffect, useState } from "react";

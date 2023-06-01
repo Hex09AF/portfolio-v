@@ -242,7 +242,6 @@ const StyledProject = styled.div`
   }
 
   .project-image {
-    ${({ theme }) => theme.mixins.boxShadow};
     height: 100%;
     grid-area: 1 / 6 / -1 / -1;
     z-index: 1;
@@ -258,6 +257,8 @@ const StyledProject = styled.div`
       height: 100%;
       border-radius: var(--border-radius);
       vertical-align: middle;
+      display: flex;
+      align-items: center;
 
       &:hover,
       &:focus {
@@ -288,6 +289,7 @@ const StyledProject = styled.div`
     }
 
     .img {
+      ${({ theme }) => theme.mixins.boxShadow};
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1) brightness(90%);
@@ -312,18 +314,6 @@ const StyledProject = styled.div`
 const Featured = () => {
   const featuredProjects = [
     {
-      name: "Sudoku",
-      Content: Sudoku,
-      meta: {
-        title: "Competitive Sudoku",
-        cover: "/featured/sudoku/sudoku.webp",
-        github: "https://github.com/Hex09AF/sudoku",
-        external: "https://sudoku-web.onrender.com",
-        tech: ["Remix", "XState", "SCSS", "Socket", "Prisma"],
-        cta: "",
-      },
-    },
-    {
       name: "Porfolio",
       Content: Portfolio,
       meta: {
@@ -332,6 +322,18 @@ const Featured = () => {
         github: "https://github.com/Hex09AF/me",
         external: "https://me-hex09af.vercel.app/",
         tech: ["SvelteKit", "Tailwindcss", "Gsap", "Threlte", "Typescript"],
+        cta: "",
+      },
+    },
+    {
+      name: "Sudoku",
+      Content: Sudoku,
+      meta: {
+        title: "Competitive Sudoku",
+        cover: "/featured/sudoku/sudokuc.webp",
+        github: "https://github.com/Hex09AF/sudoku",
+        external: "https://sudoku-web.onrender.com",
+        tech: ["Remix", "XState", "SCSS", "Socket", "Prisma"],
         cta: "",
       },
     },

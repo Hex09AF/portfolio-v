@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/components/icons/icon";
 import { cubicBezier, motion } from "framer-motion";
 import { useState } from "react";
@@ -44,6 +46,10 @@ const StyledProject = styled.li`
   position: relative;
   cursor: default;
   transition: var(--transition);
+
+  > div {
+    height: 100%;
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     &:hover,
@@ -165,7 +171,7 @@ const StyledProject = styled.li`
 const Projects = () => {
   const [showMore, setShowMore] = useState(false);
 
-  const GRID_LIMIT = 6;
+  const GRID_LIMIT = 3;
   const projects = [
     {
       content:
@@ -190,51 +196,22 @@ const Projects = () => {
     },
     {
       content:
-        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+        "Learning app that help employee improve self-learning by joining course which can be recorded by the teacher.",
       meta: {
-        title: "Pito",
+        title: "Elearning",
         github: "",
-        external: "https://app.pito.vn/",
-        tech: ["React", "NextJs", "GatsbyJs"],
+        external: "https://www.growthcollege.jp/",
+        tech: ["React", "React router", "Redux"],
       },
     },
     {
       content:
-        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+        "An app that will allow users to create, share and watch 👀 lists of YouTube channels. (Forked from CodingGarden)",
       meta: {
-        title: "Pito",
-        github: "",
-        external: "https://app.pito.vn/",
-        tech: ["React", "NextJs", "GatsbyJs"],
-      },
-    },
-    {
-      content:
-        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
-      meta: {
-        title: "Pito",
-        github: "",
-        external: "https://app.pito.vn/",
-        tech: ["React", "NextJs", "GatsbyJs"],
-      },
-    },
-    {
-      content:
-        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
-      meta: {
-        title: "Pito",
-        github: "",
-        external: "https://app.pito.vn/",
-        tech: ["React", "NextJs", "GatsbyJs"],
-      },
-    },
-    {
-      content: "Heck no",
-      meta: {
-        title: "Pito",
-        github: "",
-        external: "https://app.pito.vn/",
-        tech: ["React", "NextJs", "GatsbyJs"],
+        title: "Listd",
+        github: "https://github.com/Hex09AF/fullstack-learn",
+        external: "https://github.com/Hex09AF/fullstack-learn",
+        tech: ["Svelte", "SvelteKit", "Vite"],
       },
     },
   ];

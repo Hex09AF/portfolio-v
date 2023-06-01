@@ -1,3 +1,5 @@
+"use client";
+
 import { animate, motion, stagger } from "framer-motion";
 import { useEffect } from "react";
 import styled from "styled-components";
@@ -44,7 +46,7 @@ const StyledHeroSection = styled.section`
   }
 `;
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.2 });
+const staggerMenuItems = stagger(0.15, { startDelay: 3.7 });
 
 const Hero = () => {
   const one = <h1>Hi, my name is</h1>;
@@ -73,9 +75,9 @@ const Hero = () => {
   useEffect(() => {
     animate(
       ".hero-item",
-      { opacity: [0.01, 1], y: [20, 0] },
+      { opacity: [0, 1], y: [20, 0] },
       {
-        duration: 0.3,
+        duration: 0.4,
         delay: staggerMenuItems,
       }
     );

@@ -1,3 +1,5 @@
+"use client";
+
 import StdioJob from "@/docs/stdio.mdx";
 import { KEY_CODES } from "@/utils";
 import { motion } from "framer-motion";

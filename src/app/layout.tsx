@@ -36,7 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body id="body-app">
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
