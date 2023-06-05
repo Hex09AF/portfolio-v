@@ -195,8 +195,8 @@ const About = () => {
               <p>
                 Hello! My name is Huy, I enjoy creating things that live on the
                 internet. My interest in web development started back in 2016
-                when I decided to try earning money by helping my brother in his
-                upwork job.
+                when I made the decision to try making money by assisting my
+                brother with his Upwork project.
               </p>
 
               <p>

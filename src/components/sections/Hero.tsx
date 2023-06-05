@@ -55,8 +55,8 @@ const Hero = () => {
   const four = (
     <p>
       I’m a software developer specializing in building exceptional digital
-      experiences, passionate about making websites that have best performance,
-      secure and friendly with other developer.
+      experiences, who is passionate about creating cutting-edge, secure
+      websites.
     </p>
   );
   const five = (

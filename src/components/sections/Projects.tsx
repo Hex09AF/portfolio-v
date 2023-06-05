@@ -187,7 +187,7 @@ const Projects = () => {
     },
     {
       content:
-        "A food order platform for party, event, or even daily meal with online payment and ship tracking.",
+        "A ordering food platform for business, an event, or even a regular meal that accepts payments online and tracks orders.",
       meta: {
         title: "Pito",
         github: "",
