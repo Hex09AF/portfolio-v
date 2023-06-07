@@ -22,8 +22,7 @@ const LargeImage = styled(motion.div)`
       rgb(0 0 0 / 35%) 30%,
       rgb(0 0 0 / 0%)
     ),
-    url(https://pbs.twimg.com/media/Fx1F_KoaQAAiHF4?format=jpg&name=large) 0% 0% /
-      cover no-repeat;
+    url("/red-gundam.jpeg") 0% 0% / cover no-repeat;
   background-repeat: no-repeat;
   width: 50vw;
   filter: contrast(1);

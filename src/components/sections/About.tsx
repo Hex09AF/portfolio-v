@@ -52,123 +52,52 @@ const StyledPic = styled.div`
     margin: 50px auto 0;
     width: 70%;
   }
+  transform-style: preserve-3d;
+  perspective: 600px;
+  will-change: transform, box-shadow;
+  transform-origin: center;
 
   .wrapper {
-    ${({ theme }) => theme.mixins.boxShadow};
     display: block;
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius);
     background-color: var(--green);
+    transform-style: preserve-3d;
+    perspective: 600px;
+    will-change: transform, box-shadow;
+    transform-origin: center;
+    display: grid;
 
-    &:hover,
-    &:focus {
-      outline: 0;
-      transform: translate(-4px, -4px);
-
-      &:after {
-        transform: translate(8px, 8px);
-      }
-
-      .img {
-        filter: none;
-      }
-    }
-
-    .img {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(
-          50% 50% at 100% 0,
-          #47d3ff 0% 5%,
-          #474bff 6% 15%,
-          #47d3ff 16% 25%,
-          #474bff 26% 35%,
-          #47d3ff 36% 45%,
-          #474bff 46% 55%,
-          #47d3ff 56% 65%,
-          #474bff 66% 75%,
-          #47d3ff 76% 85%,
-          #474bff 86% 95%,
-          #0000 96%
-        ),
-        radial-gradient(
-          50% 50% at 0 100%,
-          #47d3ff 0% 5%,
-          #474bff 6% 15%,
-          #47d3ff 16% 25%,
-          #474bff 26% 35%,
-          #47d3ff 36% 45%,
-          #474bff 46% 55%,
-          #47d3ff 56% 65%,
-          #474bff 66% 75%,
-          #47d3ff 76% 85%,
-          #474bff 86% 95%,
-          #0000 96%
-        ),
-        radial-gradient(
-          50% 50%,
-          #47d3ff 0% 5%,
-          #474bff 6% 15%,
-          #47d3ff 16% 25%,
-          #474bff 26% 35%,
-          #47d3ff 36% 45%,
-          #474bff 46% 55%,
-          #47d3ff 56% 65%,
-          #474bff 66% 75%,
-          #47d3ff 76% 85%,
-          #474bff 86% 95%,
-          #0000 96%
-        ),
-        radial-gradient(
-            50% 50%,
-            #47d3ff 0% 5%,
-            #474bff 6% 15%,
-            #47d3ff 16% 25%,
-            #474bff 26% 35%,
-            #47d3ff 36% 45%,
-            #474bff 46% 55%,
-            #47d3ff 56% 65%,
-            #474bff 66% 75%,
-            #47d3ff 76% 85%,
-            #474bff 86% 95%,
-            #0000 96%
-          )
-          32px 32px;
-      background-size: 64px 64px;
-      background-color: #47d3ff;
+    .back,
+    .front {
+      display: grid;
+      grid-area: 1/1;
       border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
-      transition: var(--transition);
     }
 
-    &:before,
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--border-radius);
-      transition: var(--transition);
+    .back {
+      transform: translate3d(0, 0, -1px);
+      background: var(--green);
+      backface-visibility: visible;
     }
 
-    &:before {
-      top: 0;
-      left: 0;
-      background-color: var(--navy);
-      mix-blend-mode: screen;
+    .front {
+      background: url("/gundam.jpeg") 0% 0% / cover no-repeat;
+      backface-visibility: hidden;
     }
+  }
+  .frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
 
-    &:after {
-      border: 2px solid var(--green);
-      top: 14px;
-      left: 14px;
-      z-index: -1;
-    }
+    border: 2px solid var(--green);
+    top: 14px;
+    left: 14px;
+    z-index: -1;
   }
 `;
 
@@ -233,16 +162,10 @@ const About = () => {
 
           <StyledPic>
             <div className="wrapper">
-              <div className="img" />
-              {/* <Image
-              className="img"
-              src="/../images/me.jpg"
-              width={500}
-              height={500}
-              quality={95}
-              alt="Headshot"
-            /> */}
+              <div className="back" />
+              <div className="front" />
             </div>
+            <div className="frame" />
           </StyledPic>
         </div>
       </Reveal>
