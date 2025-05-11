@@ -1,5 +1,6 @@
 "use client";
 
+import { CometCursor } from "@/components/CometCursor";
 import Email from "@/components/Email";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
@@ -56,6 +57,8 @@ const Layout = ({ children }: PropsWithChildren) => {
           <Footer />
         </div>
       </StyledContent>
+
+      <CometCursor />
     </ThemeProvider>
   );
 };
