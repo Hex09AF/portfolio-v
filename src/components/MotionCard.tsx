@@ -138,16 +138,6 @@ function MotionCard({ children }: PropsWithChildren) {
     springTranslate.set({ x: delta.x, y: delta.y });
   }, [springTranslate]);
 
-  const moveCardToCorner = useCallback(() => {
-    const rect = cardRef.current!.getBoundingClientRect();
-    const view = document.documentElement;
-    const delta = {
-      x: round(view.clientWidth - rect.x - rect.width - 20),
-      y: round(view.clientHeight - rect.y - rect.height - 20),
-    };
-    springTranslate.set({ x: delta.x, y: delta.y });
-  }, [springTranslate]);
-
   const popOver = useCallback(() => {
     moveCardToCenter()
     springRotatePop.set({ x: 360, y: 0 });
@@ -171,7 +161,7 @@ function MotionCard({ children }: PropsWithChildren) {
    * --- Re-center when scrolling
    */
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return undefined;
 
     const scrollHandler = () => {
       setActiveCard(false);
