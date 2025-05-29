@@ -1,5 +1,6 @@
 "use client";
 
+import MotionCard from "@/components/MotionCard";
 import styled from "styled-components";
 import Reveal from "../Reveal";
 
@@ -47,15 +48,13 @@ const StyledText = styled.div`
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
+  width: 100%;
+  height: 90%;
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
     width: 70%;
   }
-  transform-style: preserve-3d;
-  perspective: 600px;
-  will-change: transform, box-shadow;
-  transform-origin: center;
 
   .wrapper {
     display: block;
@@ -161,10 +160,12 @@ const About = () => {
           </StyledText>
 
           <StyledPic>
-            <div className="wrapper">
-              <div className="back" />
-              <div className="front" />
-            </div>
+            <MotionCard>
+              <div className="wrapper">
+                <div className="back" />
+                <div className="front" />
+              </div>
+            </MotionCard>
             <div className="frame" />
           </StyledPic>
         </div>
