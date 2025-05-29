@@ -1,6 +1,7 @@
 "use client";
 
 import MotionCard from "@/components/MotionCard";
+import UnicornBackground from "@/components/UnicornBackground";
 import styled from "styled-components";
 import Reveal from "../Reveal";
 
@@ -74,6 +75,7 @@ const StyledPic = styled.div`
       display: grid;
       grid-area: 1/1;
       border-radius: var(--border-radius);
+      transition: var(--transition);
     }
 
     .back {
@@ -94,9 +96,10 @@ const StyledPic = styled.div`
     border-radius: var(--border-radius);
 
     border: 2px solid var(--green);
-    top: 14px;
-    left: 14px;
+    top: 10px;
+    left: 10px;
     z-index: -1;
+    transition: var(--transition);
   }
 `;
 
@@ -166,7 +169,9 @@ const About = () => {
                 <div className="front" />
               </div>
             </MotionCard>
-            <div className="frame" />
+            <div className="frame">
+              <UnicornBackground />
+            </div>
           </StyledPic>
         </div>
       </Reveal>
