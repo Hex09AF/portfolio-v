@@ -10,7 +10,8 @@ const LargeImage = styled(motion.div)`
   opacity: 1;
   position: absolute;
   top: 20px;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       to right,
       rgb(0 0 0 / 100%),
       rgb(0 0 0 / 35%) 30%,

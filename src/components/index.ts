@@ -13,4 +13,3 @@ export { default as Featured } from "./sections/Featured";
 export { default as Hero } from "./sections/Hero";
 export { default as Jobs } from "./sections/Jobs";
 export { default as Projects } from "./sections/Projects";
-
