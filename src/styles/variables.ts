@@ -3,20 +3,6 @@ import { calibreFont, sfMonoFont } from "./fonts";
 
 const variables = css`
   :root {
-    --dark-navy: #020c1b;
-    --navy: #0a192f;
-    --light-navy: #112240;
-    --lightest-navy: #233554;
-    --navy-shadow: rgba(2, 12, 27, 0.7);
-    --dark-slate: #495670;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
-    --lightest-slate: #ccd6f6;
-    --white: #e6f1ff;
-    --green: #e9c46a;
-    --pink: #f57dff;
-    --blue: #57cbff;
-
     --font-sans: ${calibreFont.style.fontFamily};
     --font-mono: ${sfMonoFont.style.fontFamily};
 
@@ -49,6 +35,37 @@ const variables = css`
     --ham-after-active:
       bottom 0.1s ease-out,
       transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+  }
+
+  [data-theme="dark"] {
+    --dark-navy: #020c1b;
+    --navy: #0a192f;
+    --light-navy: #112240;
+    --lightest-navy: #233554;
+    --navy-shadow: rgba(2, 12, 27, 0.7);
+    --dark-slate: #495670;
+    --slate: #8892b0;
+    --light-slate: #a8b2d1;
+    --lightest-slate: #ccd6f6;
+    --white: #e6f1ff;
+    --green: #e9c46a;
+    --pink: #f57dff;
+    --blue: #57cbff;
+  }
+
+  [data-theme="light"] {
+    --lightest-navy: #f0f4f9;
+    --light-navy: #e8ecf1;
+    --navy: #d1d9e2;
+    --dark-slate: #8892b0;
+    --slate: #495670;
+    --light-slate: #233554;
+    --lightest-slate: #112240;
+    --green: #c97f00;
+    --pink: #990099;
+    --blue: #005f8f;
+    --white: #0a192f;
+    --navy-shadow: rgba(10, 25, 47, 0.15);
   }
 `;
 

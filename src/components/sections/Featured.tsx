@@ -285,7 +285,9 @@ const StyledProject = styled.div`
         bottom: 0;
         z-index: 3;
         transition: var(--transition);
-        background-color: var(--navy);
+        html[data-theme="dark"] & {
+          background-color: var(--navy);
+        }
         mix-blend-mode: screen;
       }
     }
