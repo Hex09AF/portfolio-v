@@ -43,7 +43,7 @@ type TriggerThemeTransition = (event: MouseEvent) => void;
  */
 export function useThemeTransition(): TriggerThemeTransition {
   useEffect(() => {
-    if (typeof document.startViewTransition === "function") {
+    if (typeof (document as any).startViewTransition === "function") {
       updateCSS(transitionStyle, "view-transition-style");
     }
   }, []);
@@ -62,7 +62,7 @@ export function useThemeTransition(): TriggerThemeTransition {
   };
 
   const triggerThemeTransition: TriggerThemeTransition = (event) => {
-    if (!event || typeof document.startViewTransition !== "function") {
+    if (!event || typeof (document as any).startViewTransition !== "function") {
       return;
     }
 
@@ -76,7 +76,7 @@ export function useThemeTransition(): TriggerThemeTransition {
       Math.max(y, window.innerHeight - y)
     );
 
-    document
+    (document as any)
       .startViewTransition(() => {
         const root = document.documentElement;
         root.setAttribute("data-theme", toLight ? "light" : "dark");

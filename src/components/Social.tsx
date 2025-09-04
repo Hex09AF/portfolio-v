@@ -3,7 +3,7 @@ import Icon from "@/components/icons/icon";
 import { useThemeTransition } from "@/components/useThemeTransition";
 import { socialMedia } from "@/config";
 import { SideOrientation } from "@/types";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 import styled from "styled-components";
 
@@ -69,7 +69,7 @@ const Social = () => {
           ))}
         <SwitchThemeButton
           type="button"
-          onClick={(e) => {
+          onClick={(e: MouseEvent) => {
             triggerThemeTransition(e);
             setLight((pre) => !pre);
           }}
